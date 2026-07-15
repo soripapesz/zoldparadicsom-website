@@ -11,10 +11,10 @@
         #error-message { color: red; display: none; margin-top: 10px; }
     </style>
 </head>
-<body>
+<body class="bg-light">
 
 <div class="container">
-    <div class="login-container bg-light">
+    <div class="login-container bg-white">
         <h3 class="text-center mb-4">Partner Bejelentkezés</h3>
         
         <form id="login-form">
@@ -33,40 +33,36 @@
 </div>
 
 <script>
-// 1. Initialize Supabase
-const supabaseUrl = 'https://foitlxqsovagutbfhmsz.supabase.co';
-const supabaseKey = 'sb_publishable_P_Km4KGNEstVsaVxpqgfBQ_SffKOLBj';
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+    const supabaseUrl = 'https://foitlxqsovagutbfhmsz.supabase.co';
+    const supabaseKey = 'sb_publishable_P_Km4KGNEstVsaVxpqgfBQ_SffKOLBj';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-// 2. Handle Login Submission
-document.getElementById('login-form').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Prevent page reload
-    
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const errorMsg = document.getElementById('error-message');
-    const loginBtn = document.getElementById('login-btn');
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+        e.preventDefault(); 
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorMsg = document.getElementById('error-message');
+        const loginBtn = document.getElementById('login-btn');
 
-    loginBtn.disabled = true;
-    loginBtn.innerText = "Kérlek várj...";
-    errorMsg.style.display = "none";
+        loginBtn.disabled = true;
+        loginBtn.innerText = "Kérlek várj...";
+        errorMsg.style.display = "none";
 
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+        if (error) {
+            errorMsg.style.display = "block";
+            errorMsg.innerText = "Hiba: " + error.message;
+            loginBtn.disabled = false;
+            loginBtn.innerText = "Bejelentkezés";
+        } else {
+            window.location.href = 'rendeles.html';
+        }
     });
-
-    if (error) {
-        errorMsg.style.display = "block";
-        errorMsg.innerText = "Hiba: " + error.message;
-        loginBtn.disabled = false;
-        loginBtn.innerText = "Bejelentkezés";
-    } else {
-        // Success! Redirect to the ordering page
-        window.location.href = 'rendeles.html';
-    }
-});
 </script>
-
 </body>
 </html>

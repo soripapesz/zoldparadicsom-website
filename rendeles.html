@@ -3,66 +3,79 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bejelentkezés - Zöld Paradicsom</title>
+    <title>Rendelés - Zöld Paradicsom</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        .login-container { max-width: 400px; margin: 100px auto; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px; }
-        #error-message { color: red; display: none; margin-top: 10px; }
-    </style>
 </head>
-<body>
+<body class="bg-light">
 
-<div class="container">
-    <div class="login-container bg-light">
-        <h3 class="text-center mb-4">Partner Bejelentkezés</h3>
-        
-        <form id="login-form">
-            <div class="form-group">
-                <label for="email">Email cím</label>
-                <input type="email" class="form-control" id="email" required>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 bg-white p-5 rounded shadow-sm">
+            <h2 class="mb-3">Napi Rendelés Leadása</h2>
+            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                <p class="mb-0">Bejelentkezve mint: <strong id="user-email">Betöltés...</strong></p>
+                <button id="logout-btn" class="btn btn-sm btn-danger">Kijelentkezés</button>
             </div>
-            <div class="form-group">
-                <label for="password">Jelszó</label>
-                <input type="password" class="form-control" id="password" required>
-            </div>
-            <button type="submit" class="btn btn-success btn-block mt-3" id="login-btn">Bejelentkezés</button>
-            <p id="error-message">Hibás email vagy jelszó!</p>
-        </form>
+
+            <form id="order-form">
+                <div class="row mb-3">
+                    <div class="col-md-5">
+                        <label>Termék</label>
+                        <select id="product" class="form-control">
+                            <option value="Alma piros">Alma piros</option>
+                            <option value="Banán">Banán</option>
+                            <option value="Cékla">Cékla</option>
+                            <option value="Citrom">Citrom</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label>Mennyiség</label>
+                        <input type="number" id="quantity" class="form-control" required min="1">
+                    </div>
+                    <div class="col-md-4">
+                        <label>Mértékegység</label>
+                        <select id="unit" class="form-control">
+                            <option value="kg">kg</option>
+                            <option value="#"># (Láda)</option>
+                            <option value="db">db</option>
+                            <option value="cs">cs</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success btn-lg btn-block">Hozzáadás a rendeléshez</button>
+            </form>
+
+            <div id="status-message" class="alert alert-success mt-4" style="display:none;">Sikeresen rögzítve!</div>
+        </div>
     </div>
 </div>
 
 <script>
-    // 1. Initialize Supabase
     const supabaseUrl = 'https://foitlxqsovagutbfhmsz.supabase.co';
     const supabaseKey = 'sb_publishable_P_Km4KGNEstVsaVxpqgfBQ_SffKOLBj';
-
-    // CHANGED: Renamed to supabaseClient
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // 2. Authentication Guard (Check if user is logged in)
+    // Authentication Guard
     async function checkUser() {
         const { data: { session } } = await supabaseClient.auth.getSession();
         
         if (!session) {
-            // Not logged in! Redirect to login.
             window.location.href = 'login.html';
         } else {
-            // Display user email
             document.getElementById('user-email').innerText = session.user.email;
         }
     }
-
-    // Run the check immediately
+    
     checkUser();
 
-    // 3. Handle Logout
+    // Logout function
     document.getElementById('logout-btn').addEventListener('click', async () => {
         await supabaseClient.auth.signOut();
         window.location.href = 'login.html';
     });
 
-    // 4. Submit an Order to the Database
+    // Submit Order
     document.getElementById('order-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         
@@ -95,6 +108,5 @@
         }
     });
 </script>
-
 </body>
 </html>
