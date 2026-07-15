@@ -33,40 +33,39 @@
 </div>
 
 <script>
-    // 1. Initialize Supabase
-    const supabaseUrl = 'https://foitlxqsovagutbfhmsz.supabase.co';
-    const supabaseKey = 'sb_publishable_P_Km4KGNEstVsaVxpqgfBQ_SffKOLBj';
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+// 1. Initialize Supabase
+const supabaseUrl = 'https://foitlxqsovagutbfhmsz.supabase.co';
+const supabaseKey = 'sb_publishable_P_Km4KGNEstVsaVxpqgfBQ_SffKOLBj';
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // 2. Handle Login Submission
-    document.getElementById('login-form').addEventListener('submit', async function(e) {
-        e.preventDefault(); // Prevent page reload
-        
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const errorMsg = document.getElementById('error-message');
-        const loginBtn = document.getElementById('login-btn');
+// 2. Handle Login Submission
+document.getElementById('login-form').addEventListener('submit', async function(e) {
+    e.preventDefault(); // Prevent page reload
+    
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const errorMsg = document.getElementById('error-message');
+    const loginBtn = document.getElementById('login-btn');
 
-        loginBtn.disabled = true;
-        loginBtn.innerText = "Kérlek várj...";
-        errorMsg.style.display = "none";
+    loginBtn.disabled = true;
+    loginBtn.innerText = "Kérlek várj...";
+    errorMsg.style.display = "none";
 
-        // Call Supabase to authenticate
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: email,
-            password: password
-        });
-
-        if (error) {
-            errorMsg.style.display = "block";
-            errorMsg.innerText = "Hiba: " + error.message;
-            loginBtn.disabled = false;
-            loginBtn.innerText = "Bejelentkezés";
-        } else {
-            // Success! Redirect to the ordering page
-            window.location.href = 'rendeles.html';
-        }
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
     });
+
+    if (error) {
+        errorMsg.style.display = "block";
+        errorMsg.innerText = "Hiba: " + error.message;
+        loginBtn.disabled = false;
+        loginBtn.innerText = "Bejelentkezés";
+    } else {
+        // Success! Redirect to the ordering page
+        window.location.href = 'rendeles.html';
+    }
+});
 </script>
 
 </body>
