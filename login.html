@@ -1,158 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="hu">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bejelentkezés - Zöld Paradicsom</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        .login-container { max-width: 400px; margin: 100px auto; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px; }
+        #error-message { color: red; display: none; margin-top: 10px; }
+    </style>
+</head>
+<body>
 
-        <title>Zöld Paradicsom Kft.</title>
-        <link rel="icon" type="image/icon" href="assets/images/tabicon.ico">
-
-        <link rel="stylesheet" type="text/css" href="">
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/css/bootstrap-theme.min.css" rel="stylesheet">
-        <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,700i" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,700,700i|Josefin+Sans:700" rel="stylesheet">
-        <link href="assets/css/main.css" rel="stylesheet">
-        <link rel="icon" href="assets/images/favicon_resized.png">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<div class="container">
+    <div class="login-container bg-light">
+        <h3 class="text-center mb-4">Partner Bejelentkezés</h3>
         
-    </head>
-
-    <body>
-        <div id="index">                                           <!-- Index kezdete -->
-            <div class="container main">
-                <div class="row home">
-                    <div id = "index_left" class="col-md-6 left">
-                        <img class="img-responsive img-rabbit" src="assets/images/bolt_kivulrol.JPEG">
-                    </div>
-                    <div id = "index_right" class="col-md-6 text-center right">
-                        <!-- <div class="logo">
-                            <img src="assets/images/favicon_resized.png">
-                            <h4>Zöld Paradicsom</h4> 
-                        </div> -->
-                        <p class="home-description">
-                            Üdvözöljük a Zöld Paradicsom "Kóspallag 2009" Kft. honlapján.
-                        </p>
-                        <div class="btn-group-vertical custom_btn animated slideinright">
-                            <div id="about" class="btn btn-rabbit">Rólunk</div>
-                            <div id="work" class="btn btn-rabbit">PM_KOMPLEX_KKV_2020_A4/10</div>
-                            <div id="contact" class="btn btn-rabbit">Elérhetőségek</div>
-                        </div>      
-                        <div class="social">
-                            <a href="https://maps.app.goo.gl/zRFX3LfnLjjUJgWB8"><i class="fa fa-google" aria-hidden="true"></i></a>
-                            <!-- <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> -->
-                            <!-- <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a> -->
-                        </div>
-                    </div>
-                </div>
-
-                
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email cím</label>
+                <input type="email" class="form-control" id="email" required>
             </div>
-        </div>                                                      <!-- Index vége -->
-
-        <div id="about_scroll" class="pages ">                      <!-- Rólunk kezdete -->
-            <div class="container main">
-                <div class="row">
-                    <div class="col-md-6 left" id="about_left">
-                        <img class="img-responsive img-rabbit" src="assets/images/vegyiaru_zoldaru.JPEG">
-                    </div>
-
-                    <div class="col-md-6 right" id="about_right">
-                        <a href="#index" class="btn btn-rabbit back"> <i class="fa fa-angle-left" aria-hidden="true"></i> Vissza </a>
-                        <div id="watermark">
-                            <h2 class="page-title" text-center>Rólunk</h2>
-                            <div class="marker">a</div>
-                        </div>
-                        <p class='subtitle'>A Zöld Paradicsom élelmiszerbolt Kóspallag központi helyén, a főút és a Váci út kereszteződésében található, a polgármesteri hivatallal szemben.
-                        </p>
-                        <p class="info">Családi vállalkozásunk idestova 30 éve fogadja vásárlóit és szolgálja ki megrendelőit. Bár franchise partnerünk a Coop Zrt., az árukínálat korántsem korlátozódik szigorúan az ő termékeikre - fellelhetőek a legkülönbözőbb gyártók márkái is. Míg a kávégépből akár forró tea, addig a hűtött faliregálokból friss zöldségek és gyümölcsök is kaphatóak.</p>
-                        <p class="info">Az élelmiszerbolton belül nemzeti dohánybolt található.</p>  
-                    </div>
-                </div>
-            </div>            
-        </div>                                                        <!-- Rólunk vége -->
-
-
-        
-        <div id="work_scroll" class="pages">                                  <!-- Pályázat -->
-            <div class="container main">
-                <div class="row">
-                    <div class="col-md-6" id="work_left">
-                        <div id="owl-demo" class="owl-carousel owl-theme">
-                            <!-- <div class="item"><img class="img-responsive img-rabbit" src="assets/images/2_tabla_nev.jpg"></div> -->
-                            <div class="item"><img class="img-responsive img-rabbit" src="assets/images/fagyasztok.JPG"></div>
-                            <div class="item"><img class="img-responsive img-rabbit" src="assets/images/zoldseghuto_faliregal.JPG"></div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6" id="work_right">
-                        <a href="#index" class="btn btn-rabbit back"> <i class="fa fa-angle-left" aria-hidden="true"></i> Vissza </a>
-                        <div id="watermark">
-                            <h2 class="page-title" text-center>PM_KOMPLEX_KKV_2020_A4/10</h2>
-                            <div class="marker">w</div>
-                        </div>
-                        <p class='subtitle'>Kapacitásbővítő beruházás a Zöld Paradicsom "Kóspallag 2009" Kft.-nél
-                        </p>
-                        <p class="info">Támogató neve: Pénzügyminisztérium</p>
-                        <p class="info">Támogatási szerződés szerinti támogatási összeg: 2 544 745 Ft</p>
-                        <p class="info">Projekt tényleges befejezési dátuma: 2022.03.31.</p>
-                        <p class="info">Projekt tartalmának bemutatása: A projekt megvalósítása során eszközbeszerzésre került sor. 3 db dupla üvegajtós álló fagyasztószekrényt, valamint 2 db beépített aggregátoros zöldséghűtő faliregált szereztünk be. Az új berendezéseknek köszönhetően javult a tárolási kapacitás és a helykihasználás, ami lehetővé tette az eladótér növelését és a termékkínálat bővítését. A modern, energiatakarékos eszközök hozzájárulnak a bolt hatékonyabb és gazdaságosabb működéséhez. A fejlesztés eredményeként a vállalkozás versenyképesebbé vált és biztosítani tudta a fenntartható működés feltételeit.</p>
-                    </div>
-                </div>
-            </div>    
-        </div>                                                                 <!-- Pályázat vége  -->
-
-
-        <div id="contact_scroll" class="pages">                             <!-- Elérhetőségek -->
-            <div class="container main">
-                <div class="row">
-                    <div class="col-md-6 left" id="contact_left">
-                        <img class="img-responsive img-rabbit" src="assets/images/szorolap_zp.png">
-                    </div>
-
-                    <div class="col-md-6 right" id="contact_right">
-                        <a href="#index" class="btn btn-rabbit back"> <i class="fa fa-angle-left" aria-hidden="true"></i> Vissza </a>
-                        <div id="watermark">
-                            <h2 class="page-title" text-center>Elérhetőségek</h2>
-                            <div class="marker">c</div>
-                        </div>
-                        <p class='subtitle'>Küldjön üzenetet nekünk!
-                        </p>
-                        <!-- form -->
-                        <form class="form_edit"> 
-                            <div class="form-group">
-                                <input type="name" class="form-control" id="exampleInputName" placeholder="Név">
-                            </div>
-
-                            <div class="form-group">
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                            </div>
-
-                            <div class="form-group">
-                            <textarea class="form-control" rows="5" placeholder="Üzenet"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-rabbit submit">Üzenet küldése</button>
-                        </form>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="password">Jelszó</label>
+                <input type="password" class="form-control" id="password" required>
             </div>
-       
-            <footer class="text-center">
-                <div class="container bottom">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <!-- <p>Made with <i class="fa fa-heartbeat" aria-hidden="true"></i> by <a href="https://themewagon.com/">Themewagon</a></p> -->
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            
-        </div>                                                              <!-- Elérhetőségek vége -->
+            <button type="submit" class="btn btn-success btn-block mt-3" id="login-btn">Bejelentkezés</button>
+            <p id="error-message">Hibás email vagy jelszó!</p>
+        </form>
+    </div>
+</div>
+
+<script>
+    // 1. Initialize Supabase
+    const supabaseUrl = 'https://foitlxqsovagutbfhmsz.supabase.co';
+    const supabaseKey = 'sb_publishable_P_Km4KGNEstVsaVxpqgfBQ_SffKOLBj';
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // 2. Handle Login Submission
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+        e.preventDefault(); // Prevent page reload
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/script.js"></script>
-    </body>
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const errorMsg = document.getElementById('error-message');
+        const loginBtn = document.getElementById('login-btn');
+
+        loginBtn.disabled = true;
+        loginBtn.innerText = "Kérlek várj...";
+        errorMsg.style.display = "none";
+
+        // Call Supabase to authenticate
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+        if (error) {
+            errorMsg.style.display = "block";
+            errorMsg.innerText = "Hiba: " + error.message;
+            loginBtn.disabled = false;
+            loginBtn.innerText = "Bejelentkezés";
+        } else {
+            // Success! Redirect to the ordering page
+            window.location.href = 'rendeles.html';
+        }
+    });
+</script>
+
+</body>
 </html>
