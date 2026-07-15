@@ -60,7 +60,9 @@
             loginBtn.disabled = false;
             loginBtn.innerText = "Bejelentkezés";
         } else {
-            window.location.href = 'rendeles.html';
+            setTimeout(() => {
+                window.location.href = 'rendeles.html';
+            }, 500); // Let the browser save the session before redirecting
         }
     });
 </script>
